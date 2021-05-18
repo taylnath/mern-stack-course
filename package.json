@@ -1,0 +1,28 @@
+{
+  "name": "mern-course",
+  "version": "1.0.0",
+  "description": "Shopping list built with MERN stack.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taylnath/mern-stack-course.git"
+  },
+  "author": "Nathan Taylor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/taylnath/mern-stack-course/issues"
+  },
+  "homepage": "https://github.com/taylnath/mern-stack-course#readme",
+  "dependencies": {
+    "concurrently": "^6.1.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.10"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
