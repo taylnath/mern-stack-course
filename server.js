@@ -32,13 +32,7 @@ if (process.env.NODE_ENV === 'production'){
 
   app.get('*', (req, res) => {
     // res.sendFile('index.html');
-    const buildDir = path.join(__dirname, 'client', 'build');
-    fs.readdir(buildDir, (err, files) => {
-      files.forEach(file => {
-        console.log(file);
-      });
-    });
-    res.sendFile(path.join(buildDir, 'index.html'));
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
   });
 }
 
