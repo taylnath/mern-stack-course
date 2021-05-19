@@ -1,15 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { v1 as uuid } from 'uuid';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { getItems } from '../actions/itemActions';
+import PropTypes from 'prop-types'
 
-function ShoppingList (){
-  const [items, setItems] = useState([
-    { id: uuid(), name: 'Eggs'},
-    { id: uuid(), name: 'Milk'},
-    { id: uuid(), name: 'Steak'},
-    { id: uuid(), name: 'Water'},
-  ]);
+function ShoppingList (props){
+  // const [items, setItems] = useState([
+  //   { id: uuid(), name: 'Eggs'},
+  //   { id: uuid(), name: 'Milk'},
+  //   { id: uuid(), name: 'Steak'},
+  //   { id: uuid(), name: 'Water'},
+  // ]);
+  // const items = props.item;
+  const items = useSelector(state => state.item.items);
+  console.log(items);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getItems());
+  }, []);
 
   return (
     <Container>
@@ -19,7 +29,13 @@ function ShoppingList (){
         onClick={() => {
           const name = prompt('Enter Item');
           if (name){
-            setItems(items => [...items, { id: uuid(), name}]);
+            console.log(name);
+            dispatch('ADD_ITEM', name);
+            // dispatch(items => {
+            //   console.log("in dispatch");
+            //   console.log(items);
+            //   return [...items, { id: uuid(), name}];
+            // });
           }
         }}
         >
@@ -35,7 +51,8 @@ function ShoppingList (){
                 color="danger"
                 size="small"
                 onClick={() => {
-                  setItems(items => 
+                  items = items.filter(item => item.id !== id);
+                  dispatch(items => 
                     items.filter(item => item.id !== id)
                   )
                 }}
@@ -50,4 +67,9 @@ function ShoppingList (){
   )
 }
 
+// const mapStateToProps = (state) => ({
+//   item: state.item
+// })
+
 export default ShoppingList;
+// export default connect(mapStateToProps, { getItems })(ShoppingList);
