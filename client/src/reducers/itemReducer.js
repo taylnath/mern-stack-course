@@ -16,8 +16,16 @@ export default function(state = initialState, action) {
       return {
         ...state
       };
+    case DELETE_ITEM:
+      return { 
+        ...state,
+        items: state.items.filter(x => x.id !== action.payload)
+      };
     case ADD_ITEM:
-      return { items: [...state.items, { id: uuid(), name: action.payload }]}
+      return {
+        ...state,
+        items: [...state.items, action.payload]
+      };
     default:
       return state;
   }

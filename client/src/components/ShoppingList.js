@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { v1 as uuid } from 'uuid';
+// import { v1 as uuid } from 'uuid';
 import { connect, useSelector, useDispatch } from 'react-redux';
-import { getItems } from '../actions/itemActions';
+import { getItems, deleteItem, addItem } from '../actions/itemActions';
 import PropTypes from 'prop-types'
 
 function ShoppingList (props){
@@ -23,14 +23,15 @@ function ShoppingList (props){
 
   return (
     <Container>
-      <Button 
+      {/* <Button 
         color="dark" 
         style={{marginBottom: '2rem'}}
         onClick={() => {
           const name = prompt('Enter Item');
           if (name){
             console.log(name);
-            dispatch('ADD_ITEM', name);
+            dispatch(addItem(name));
+            // dispatch(getItems());
             // dispatch(items => {
             //   console.log("in dispatch");
             //   console.log(items);
@@ -40,7 +41,7 @@ function ShoppingList (props){
         }}
         >
         Add Item
-      </Button>
+      </Button> */}
       <ListGroup>
         <TransitionGroup className="shopping-list">
           {items.map(({ id, name }) => ( 
@@ -50,12 +51,7 @@ function ShoppingList (props){
                 className="remove-btn"
                 color="danger"
                 size="small"
-                onClick={() => {
-                  items = items.filter(item => item.id !== id);
-                  dispatch(items => 
-                    items.filter(item => item.id !== id)
-                  )
-                }}
+                onClick={() => dispatch(deleteItem(id))}
                 >&times;</Button>
                 {name}
               </ListGroupItem>
