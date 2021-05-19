@@ -11,7 +11,7 @@ import {
 import { addItem } from '../actions/itemActions';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { v1 as uuid } from 'uuid';
+// import { v1 as uuid } from 'uuid';
 
 function ItemModal (){
   const [modal, setModal] = useState(false);
@@ -30,7 +30,7 @@ function ItemModal (){
     e.preventDefault();
 
     const newItem = {
-      id: uuid(),
+      // id: uuid(),
       name: name
     }
 
